@@ -87,7 +87,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#" className="text-xl font-bold tracking-tighter flex items-center gap-2">
           <div className="w-8 h-8 bg-neutral-900 rounded-full flex items-center justify-center text-white text-sm">JD</div>
-          <span>张三</span>
+          <span>康康无损伴奏</span>
         </a>
 
         {/* Desktop Nav */}
@@ -214,7 +214,7 @@ const About = () => {
           </div>
         </div>
         <div>
-          <h2 className="text-3xl font-serif font-medium mb-8">关于我</h2>
+          <h2 className="text-3xl font-serif font-medium mb-8">联系我</h2>
           <div className="space-y-6 text-neutral-600 leading-relaxed">
             <p>
               我的职业生涯始于平面设计，这为我在视觉层次和排版方面打下了坚实的基础。多年来，我转型为全栈开发人员，将这些设计变为现实。
