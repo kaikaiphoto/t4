@@ -382,11 +382,11 @@ const Contact = () => {
           className="inline-flex items-center gap-3 px-10 py-5 bg-white text-neutral-900 rounded-full font-bold text-lg hover:scale-105 transition-transform"
         >
           <Mail size={24} />
-          打个招呼
+          交个朋友
         </a>
 
         <div className="mt-24 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-neutral-500 text-sm">© 2026 张三. 保留所有权利。</p>
+          <p className="text-neutral-500 text-sm">© 2026 康康无损伴奏. 保留所有权利。</p>
           <div className="flex gap-8">
             <a href="#" className="text-neutral-500 hover:text-white transition-colors text-sm">Twitter</a>
             <a href="#" className="text-neutral-500 hover:text-white transition-colors text-sm">LinkedIn</a>
