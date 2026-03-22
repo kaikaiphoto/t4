@@ -18,7 +18,11 @@ import {
   MessageSquare,
   Menu,
   X,
-  ArrowUpRight
+  ArrowUpRight,
+  Layout,
+  Server,
+  Palette,
+  Wrench
 } from 'lucide-react';
 
 // --- Types ---
@@ -73,6 +77,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: '关于我', href: '#about' },
+    { name: '技能', href: '#skills' },
     { name: '项目案例', href: '#projects' },
     { name: '联系我', href: '#contact' },
   ];
@@ -82,7 +87,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#" className="text-xl font-bold tracking-tighter flex items-center gap-2">
           <div className="w-8 h-8 bg-neutral-900 rounded-full flex items-center justify-center text-white text-sm">JD</div>
-          <span>康康无损伴奏</span>
+          <span>张三</span>
         </a>
 
         {/* Desktop Nav */}
@@ -100,7 +105,7 @@ const Navbar = () => {
             href="#contact" 
             className="px-5 py-2 bg-neutral-900 text-white text-sm font-medium rounded-full hover:bg-neutral-800 transition-all"
           >
-            进群交流
+            开始聊聊
           </a>
         </div>
 
@@ -244,6 +249,72 @@ const About = () => {
   );
 };
 
+const Skills = () => {
+  const skillCategories = [
+    {
+      title: "前端开发",
+      icon: <Layout className="text-blue-500" size={24} />,
+      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux", "Framer Motion"]
+    },
+    {
+      title: "后端开发",
+      icon: <Server className="text-green-500" size={24} />,
+      skills: ["Node.js", "Express", "PostgreSQL", "MongoDB", "GraphQL", "REST API"]
+    },
+    {
+      title: "设计",
+      icon: <Palette className="text-purple-500" size={24} />,
+      skills: ["Figma", "Adobe XD", "UI/UX Design", "Visual Identity", "Prototyping"]
+    },
+    {
+      title: "工具",
+      icon: <Wrench className="text-orange-500" size={24} />,
+      skills: ["Git", "Docker", "VS Code", "Postman", "Vercel", "CI/CD"]
+    }
+  ];
+
+  return (
+    <section id="skills" className="py-24 px-6 bg-neutral-50">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-serif font-medium mb-4">专业技能</h2>
+          <p className="text-neutral-500 max-w-2xl mx-auto">
+            在多年的实践中，我积累了涵盖设计到开发的全栈技术能力，致力于打造高质量的数字产品。
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {skillCategories.map((category, index) => (
+            <motion.div 
+              key={category.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="mb-6 p-3 bg-neutral-50 w-fit rounded-2xl">
+                {category.icon}
+              </div>
+              <h3 className="text-lg font-bold mb-4">{category.title}</h3>
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map(skill => (
+                  <span 
+                    key={skill} 
+                    className="px-3 py-1 bg-neutral-100 text-neutral-600 text-xs font-medium rounded-full"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Projects = () => {
   return (
     <section id="projects" className="py-24 px-6">
@@ -334,6 +405,7 @@ export default function App() {
       <main>
         <Hero />
         <About />
+        <Skills />
         <Projects />
         <Contact />
       </main>
