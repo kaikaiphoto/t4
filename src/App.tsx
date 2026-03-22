@@ -22,7 +22,13 @@ import {
   Layout,
   Server,
   Palette,
-  Wrench
+  Wrench,
+  Music,
+  Mic2,
+  Headphones,
+  Speaker,
+  Volume2,
+  Disc
 } from 'lucide-react';
 
 // --- Types ---
@@ -39,31 +45,86 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     id: 1,
-    title: "AI 写作助手",
-    description: "一个强大的工具，利用先进的 LLM 帮助作者生成创意并润色文章。",
-    tags: ["React", "TypeScript", "Tailwind", "Gemini API"],
+    title: "无损伴奏提取案例",
+    description: "利用 AI 技术从复杂音轨中完美分离人声与伴奏，保留极致音质细节。",
+    tags: ["无损提取", "AI 分离", "音质增强"],
     link: "#",
-    image: "https://picsum.photos/seed/writing/800/600"
+    image: "https://picsum.photos/seed/music1/800/600"
   },
   {
     id: 2,
-    title: "EcoTrack 仪表盘",
-    description: "为智能城市设计的实时环境监测仪表盘，用于追踪空气质量和能源消耗。",
-    tags: ["Next.js", "D3.js", "PostgreSQL", "IoT"],
+    title: "流行单曲后期混音",
+    description: "为多位独立音乐人提供专业的人声修音与混音服务，打造商业级听感。",
+    tags: ["混音工程", "人声修音", "母带处理"],
     link: "#",
-    image: "https://picsum.photos/seed/eco/800/600"
+    image: "https://picsum.photos/seed/music2/800/600"
   },
   {
     id: 3,
-    title: "极简电商平台",
-    description: "专注于高端生活方式产品的、高性能且易用的购物体验。",
-    tags: ["React", "Shopify API", "Framer Motion"],
+    title: "古典乐谱数字化重制",
+    description: "将手写或老旧乐谱数字化，并重新编排伴奏，赋予经典新的生命。",
+    tags: ["乐谱重制", "伴奏编排", "古典音乐"],
     link: "#",
-    image: "https://picsum.photos/seed/shop/800/600"
+    image: "https://picsum.photos/seed/music3/800/600"
   }
 ];
 
 // --- Components ---
+
+const MusicBackground = () => {
+  const symbols = [
+    { icon: <Music size={40} />, top: '10%', left: '5%', rotate: 15 },
+    { icon: <Mic2 size={32} />, top: '25%', left: '85%', rotate: -10 },
+    { icon: <Headphones size={48} />, top: '60%', left: '10%', rotate: -20 },
+    { icon: <Speaker size={36} />, top: '75%', left: '80%', rotate: 10 },
+    { icon: <Volume2 size={28} />, top: '15%', left: '70%', rotate: 5 },
+    { icon: <Disc size={56} />, top: '85%', left: '15%', rotate: -5 },
+    { text: "∮", top: '40%', left: '90%', size: 'text-6xl', rotate: 10 },
+    { text: "♫", top: '50%', left: '5%', size: 'text-5xl', rotate: -15 },
+    { text: "♭", top: '20%', left: '20%', size: 'text-4xl', rotate: 5 },
+    { text: "♯", top: '70%', left: '92%', size: 'text-4xl', rotate: -10 },
+    { text: "♩", top: '30%', left: '75%', size: 'text-3xl', rotate: 15 },
+    { text: "𝄞", top: '5%', left: '40%', size: 'text-7xl', rotate: -5 },
+    { text: "𝄢", top: '80%', left: '60%', size: 'text-6xl', rotate: 12 },
+    { text: "𝅘𝅥𝅮", top: '45%', left: '25%', size: 'text-4xl', rotate: -8 },
+    { text: "𝄐", top: '15%', left: '45%', size: 'text-5xl', rotate: 0 },
+    { text: "𝄫", top: '65%', left: '35%', size: 'text-4xl', rotate: -12 },
+    { text: "𝄪", top: '35%', left: '65%', size: 'text-4xl', rotate: 10 },
+  ];
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0 opacity-[0.03]">
+      {symbols.map((item, i) => (
+        <motion.div
+          key={i}
+          className={`absolute ${item.size || ''} font-serif`}
+          style={{ top: item.top, left: item.left }}
+          initial={{ opacity: 0, rotate: item.rotate }}
+          animate={{ 
+            opacity: 1, 
+            y: [0, -20, 0],
+            rotate: [item.rotate, item.rotate + 5, item.rotate]
+          }}
+          transition={{ 
+            duration: 5 + i % 3, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            delay: i * 0.2
+          }}
+        >
+          {item.icon || item.text}
+        </motion.div>
+      ))}
+      
+      {/* Decorative Staff Lines */}
+      <div className="absolute top-1/4 left-0 w-full h-px bg-neutral-900/10 transform -rotate-3"></div>
+      <div className="absolute top-[26%] left-0 w-full h-px bg-neutral-900/10 transform -rotate-3"></div>
+      <div className="absolute top-[27%] left-0 w-full h-px bg-neutral-900/10 transform -rotate-3"></div>
+      <div className="absolute top-[28%] left-0 w-full h-px bg-neutral-900/10 transform -rotate-3"></div>
+      <div className="absolute top-[29%] left-0 w-full h-px bg-neutral-900/10 transform -rotate-3"></div>
+    </div>
+  );
+};
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -86,7 +147,9 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-4 glass shadow-sm' : 'py-6 bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#" className="text-xl font-bold tracking-tighter flex items-center gap-2">
-          <div className="w-8 h-8 bg-neutral-900 rounded-full flex items-center justify-center text-white text-sm">JD</div>
+          <div className="w-8 h-8 bg-neutral-900 rounded-full flex items-center justify-center text-white text-sm">
+            <Music size={16} />
+          </div>
           <span>康康无损伴奏</span>
         </a>
 
@@ -153,8 +216,9 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section className="pt-32 pb-20 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+      <MusicBackground />
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -165,10 +229,10 @@ const Hero = () => {
             开放合作中
           </span>
           <h1 className="text-5xl md:text-7xl font-serif font-medium leading-[1.1] mb-8">
-            打造有<span className="italic">温度</span>的数字体验。
+            还原纯净，<span className="italic">重塑</span>听觉盛宴。
           </h1>
           <p className="text-xl text-neutral-500 leading-relaxed mb-10 max-w-2xl">
-            我是一名设计师兼开发者，专注于创造简洁、实用且以用户为中心的应用。目前正在探索 AI 与人类创造力的结合点。
+            我是康康，专注于高品质无损伴奏制作与后期混音。通过先进技术与敏锐听感，为您提供最纯净的音乐伴奏体验。
           </p>
           <div className="flex flex-wrap gap-4">
             <a 
@@ -198,8 +262,9 @@ const Hero = () => {
 
 const About = () => {
   return (
-    <section id="about" className="py-24 px-6 bg-white border-y border-neutral-100">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <section id="about" className="relative py-24 px-6 bg-white border-y border-neutral-100 overflow-hidden">
+      <MusicBackground />
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
         <div className="relative">
           <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-neutral-100">
             <img 
@@ -214,13 +279,13 @@ const About = () => {
           </div>
         </div>
         <div>
-          <h2 className="text-3xl font-serif font-medium mb-8">联系我</h2>
+          <h2 className="text-3xl font-serif font-medium mb-8">关于康康</h2>
           <div className="space-y-6 text-neutral-600 leading-relaxed">
             <p>
-              我的职业生涯始于平面设计，这为我在视觉层次和排版方面打下了坚实的基础。多年来，我转型为全栈开发人员，将这些设计变为现实。
+              我的音乐之旅始于对纯净音质的执着追求。作为一名音频工程师，我深知伴奏对于演唱者的重要性。
             </p>
             <p>
-              我的哲学很简单：技术应该是隐形的。我努力构建感觉自然直观的工具，消除用户与其目标之间的摩擦。
+              我的目标是利用最先进的音频处理技术，从任何音轨中提取出最真实、最无损的伴奏。无论是流行、古典还是爵士，我都能为您还原最纯粹的旋律。
             </p>
             <div className="grid grid-cols-2 gap-8 pt-6">
               <div>
@@ -252,30 +317,31 @@ const About = () => {
 const Skills = () => {
   const skillCategories = [
     {
-      title: "前端开发",
-      icon: <Layout className="text-blue-500" size={24} />,
-      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux", "Framer Motion"]
+      title: "伴奏制作",
+      icon: <Music className="text-blue-500" size={24} />,
+      skills: ["无损提取", "消音伴奏", "升降调", "节奏校准", "音质增强"]
     },
     {
-      title: "后端开发",
-      icon: <Server className="text-green-500" size={24} />,
-      skills: ["Node.js", "Express", "PostgreSQL", "MongoDB", "GraphQL", "REST API"]
+      title: "后期处理",
+      icon: <Mic2 className="text-green-500" size={24} />,
+      skills: ["人声修音", "混音工程", "母带处理", "降噪修复", "音效添加"]
     },
     {
-      title: "设计",
+      title: "乐理知识",
       icon: <Palette className="text-purple-500" size={24} />,
-      skills: ["Figma", "Adobe XD", "UI/UX Design", "Visual Identity", "Prototyping"]
+      skills: ["和弦分析", "曲式结构", "节奏型设计", "调式识别", "扒谱能力"]
     },
     {
-      title: "工具",
+      title: "专业工具",
       icon: <Wrench className="text-orange-500" size={24} />,
-      skills: ["Git", "Docker", "VS Code", "Postman", "Vercel", "CI/CD"]
+      skills: ["Cubase", "FL Studio", "Adobe Audition", "iZotope RX", "Melodyne"]
     }
   ];
 
   return (
-    <section id="skills" className="py-24 px-6 bg-neutral-50">
-      <div className="max-w-7xl mx-auto">
+    <section id="skills" className="relative py-24 px-6 bg-neutral-50 overflow-hidden">
+      <MusicBackground />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-serif font-medium mb-4">专业技能</h2>
           <p className="text-neutral-500 max-w-2xl mx-auto">
@@ -317,8 +383,9 @@ const Skills = () => {
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="relative py-24 px-6 overflow-hidden">
+      <MusicBackground />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex justify-between items-end mb-16">
           <div>
             <h2 className="text-4xl font-serif font-medium mb-4">精选案例</h2>
@@ -371,11 +438,14 @@ const Projects = () => {
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-24 px-6 bg-neutral-900 text-white rounded-[3rem] mx-4 mb-4">
-      <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-4xl md:text-6xl font-serif font-medium mb-8">让我们一起 <br /> 创造精彩。</h2>
+    <section id="contact" className="relative py-24 px-6 bg-neutral-900 text-white rounded-[3rem] mx-4 mb-4 overflow-hidden">
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <MusicBackground />
+      </div>
+      <div className="max-w-7xl mx-auto text-center relative z-10">
+        <h2 className="text-4xl md:text-6xl font-serif font-medium mb-8">让您的歌声 <br /> 拥有最完美的衬托。</h2>
         <p className="text-neutral-400 text-lg mb-12 max-w-xl mx-auto">
-          我随时准备讨论新项目、创意想法或成为您愿景一部分的机会。
+          如果您需要高品质的伴奏制作、人声后期或音频修复，欢迎随时联系我，让我们共同打造极致的音乐作品。
         </p>
         <a 
           href="mailto:hello@example.com" 
